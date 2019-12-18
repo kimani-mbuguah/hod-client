@@ -1,6 +1,6 @@
 import axios from "axios"
 import { GET_ERRORS, GET_ADMINS, GET_ADMIN } from "./types"
-const backendApi = "https://morning-forest-96780.herokuapp.com/admin"
+const backendApi = "http://34.68.158.39:5002/admin"
 
 //Get all admins
 export const listAdmins = history => dispatch => {

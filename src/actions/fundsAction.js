@@ -6,7 +6,7 @@ import {
   GET_FUNDS_LIST
 } from "./types"
 
-const backendApi = "https://morning-forest-96780.herokuapp.com/money"
+const backendApi = "http://34.68.158.39:5002/money"
 export const postFundsIn = (fundsInData, history) => dispatch => {
   return axios
     .post(`${backendApi}/in`, fundsInData)

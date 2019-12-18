@@ -9,7 +9,7 @@ import {
   SET_CURRENT_USER
 } from "./types"
 
-const backendApi = "https://morning-forest-96780.herokuapp.com/profile"
+const backendApi = "http://34.68.158.39:5002/profile"
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {

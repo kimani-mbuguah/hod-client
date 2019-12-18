@@ -4,7 +4,7 @@ import setAuthToken from "../utils/setAuthToken"
 
 import { GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS } from "./types"
 
-const backendApi = "https://morning-forest-96780.herokuapp.com/auth"
+const backendApi = "http://34.68.158.39:5002/auth"
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {

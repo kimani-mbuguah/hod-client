@@ -10,7 +10,7 @@ import {
   GET_MEMBERS_COUNT
 } from "./types"
 
-const backendApi = "https://morning-forest-96780.herokuapp.com/member"
+const backendApi = "http://34.68.158.39:5002/member"
 // Register Member
 export const registerMember = (userData, history) => dispatch => {
   return axios
