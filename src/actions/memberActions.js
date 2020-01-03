@@ -1,5 +1,5 @@
-import axios from "axios"
-import { toastr } from "react-redux-toastr"
+import axios from "axios";
+import { toastr } from "react-redux-toastr";
 import {
   GET_ERRORS,
   GET_MEMBERS,
@@ -8,9 +8,10 @@ import {
   GET_SMS_MEMBERS,
   GET_RELATIONSHIP_MEMBERS,
   GET_MEMBERS_COUNT
-} from "./types"
+} from "./types";
 
-const backendApi = "http://34.68.158.39:5002/member"
+const backendApi = "http://34.68.158.39:5002/member";
+//const backendApi = "http://127.0.0.1:5002/member";
 // Register Member
 export const registerMember = (userData, history) => dispatch => {
   return axios
@@ -18,20 +19,20 @@ export const registerMember = (userData, history) => dispatch => {
     .then(res => {
       dispatch({
         type: CLEAR_ERRORS
-      })
+      });
 
-      return res
+      return res;
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      });
       if (err.response) {
-        return err.response
+        return err.response;
       }
-    })
-}
+    });
+};
 
 //Get all members
 export const listMembers = history => dispatch => {
@@ -42,20 +43,20 @@ export const listMembers = history => dispatch => {
         dispatch({
           type: GET_MEMBERS,
           payload: res.data
-        })
+        });
       } else if (res.status == 403) {
-        history.push("/admin/dashboard")
+        history.push("/admin/dashboard");
       }
     })
     .catch(err => {
       dispatch({
         type: GET_MEMBERS,
         payload: {}
-      })
+      });
 
-      history.push("/auth/login")
-    })
-}
+      history.push("/auth/login");
+    });
+};
 
 //Get all members
 export const listSmsMembers = history => dispatch => {
@@ -66,20 +67,20 @@ export const listSmsMembers = history => dispatch => {
         dispatch({
           type: GET_SMS_MEMBERS,
           payload: res.data
-        })
+        });
       } else if (res.status == 403) {
-        history.push("/admin/dashboard")
+        history.push("/admin/dashboard");
       }
     })
     .catch(err => {
       dispatch({
         type: GET_SMS_MEMBERS,
         payload: {}
-      })
+      });
 
-      history.push("/auth/login")
-    })
-}
+      history.push("/auth/login");
+    });
+};
 
 //Get all members
 export const listRelationshipMembers = history => dispatch => {
@@ -90,20 +91,20 @@ export const listRelationshipMembers = history => dispatch => {
         dispatch({
           type: GET_RELATIONSHIP_MEMBERS,
           payload: res.data
-        })
+        });
       } else if (res.status == 403) {
-        history.push("/admin/dashboard")
+        history.push("/admin/dashboard");
       }
     })
     .catch(err => {
       dispatch({
         type: GET_SMS_MEMBERS,
         payload: {}
-      })
+      });
 
-      history.push("/auth/login")
-    })
-}
+      history.push("/auth/login");
+    });
+};
 
 // Get one member
 export const listMember = (email, history) => dispatch => {
@@ -113,50 +114,50 @@ export const listMember = (email, history) => dispatch => {
       dispatch({
         type: GET_MEMBER,
         payload: res.data.member
-      })
-      history.push("/admin/member-profile")
+      });
+      history.push("/admin/member-profile");
     })
     .catch(() => {
       dispatch({
         type: GET_MEMBER,
         payload: null
-      })
-      history.push("/auth/login")
-    })
-}
+      });
+      history.push("/auth/login");
+    });
+};
 
 // Get one member
 export const postUpdateProfile = (profileBody, history) => dispatch => {
-  console.log(profileBody)
+  console.log(profileBody);
   return axios
     .post(`${backendApi}/updateprofile`, profileBody)
     .then(res => {
       dispatch({
         type: GET_MEMBER,
         payload: profileBody
-      })
-      history.push("/admin/member-profile")
-      return res
+      });
+      history.push("/admin/member-profile");
+      return res;
     })
     .catch(err =>
       dispatch({
         type: GET_MEMBER,
         payload: null
       })
-    )
-}
+    );
+};
 
 export const postUpdateProfilePic = (profilePicBody, history) => dispatch => {
-  console.log(profilePicBody)
+  console.log(profilePicBody);
   return axios
     .post(`${backendApi}/updateprofilepic`, profilePicBody)
     .then(res => {
-      return res
+      return res;
     })
     .catch(err => {
-      return err
-    })
-}
+      return err;
+    });
+};
 
 // Register Member
 export const sendSms = (messageBody, history) => dispatch => {
@@ -165,20 +166,20 @@ export const sendSms = (messageBody, history) => dispatch => {
     .then(res => {
       dispatch({
         type: CLEAR_ERRORS
-      })
+      });
 
-      return res
+      return res;
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      });
       if (err.response) {
-        return err.response
+        return err.response;
       }
-    })
-}
+    });
+};
 
 // Post Relationship
 export const postRelationship = (relationshipBody, history) => dispatch => {
@@ -187,20 +188,20 @@ export const postRelationship = (relationshipBody, history) => dispatch => {
     .then(res => {
       dispatch({
         type: CLEAR_ERRORS
-      })
+      });
 
-      return res
+      return res;
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      });
       if (err.response) {
-        return err.response
+        return err.response;
       }
-    })
-}
+    });
+};
 
 export const sendMultipleSms = (messageBody, history) => dispatch => {
   return axios
@@ -208,20 +209,41 @@ export const sendMultipleSms = (messageBody, history) => dispatch => {
     .then(res => {
       dispatch({
         type: CLEAR_ERRORS
-      })
+      });
 
-      return res
+      return res;
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      });
       if (err.response) {
-        return err.response
+        return err.response;
       }
+    });
+};
+
+export const createCustomGroup = (groupBody, history) => dispatch => {
+  return axios
+    .post(`${backendApi}/creategroup`, groupBody)
+    .then(res => {
+      dispatch({
+        type: CLEAR_ERRORS
+      });
+
+      return res;
     })
-}
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+      if (err.response) {
+        return err.response;
+      }
+    });
+};
 
 export const sendGroupSms = messageBody => dispatch => {
   return axios
@@ -229,20 +251,20 @@ export const sendGroupSms = messageBody => dispatch => {
     .then(res => {
       dispatch({
         type: CLEAR_ERRORS
-      })
+      });
 
-      return res
+      return res;
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      });
       if (err.response) {
-        return err.response
+        return err.response;
       }
-    })
-}
+    });
+};
 
 export const getMembersCount = history => dispatch => {
   return axios
@@ -251,11 +273,11 @@ export const getMembersCount = history => dispatch => {
       dispatch({
         type: GET_MEMBERS_COUNT,
         payload: res.data.count
-      })
+      });
 
-      return res
+      return res;
     })
     .catch(err => {
-      history.push("/auth/login")
-    })
-}
+      history.push("/auth/login");
+    });
+};

@@ -1,30 +1,31 @@
-import AdminList from "views/Pages/AdminList.jsx"
-import AdminProfile from "views/Pages/AdminProfile.jsx"
-import Charts from "views/Charts/Charts.jsx"
-import Dashboard from "views/Dashboard/Dashboard.jsx"
-import EditProfile from "views/Pages/EditProfile.jsx"
-import ErrorPage from "views/Pages/ErrorPage.jsx"
-import FundsIn from "views/Pages/FundsIn.jsx"
-import FundsList from "views/Pages/FundsList.jsx"
-import FundsOut from "views/Pages/FundsOut.jsx"
-import GroupSms from "views/Pages/GroupSms.jsx"
-import IndividualSMS from "views/Pages/IndividualSMS.jsx"
-import LockScreenPage from "views/Pages/LockScreenPage.jsx"
-import LoginPage from "views/Pages/LoginPage.jsx"
-import MemberList from "views/Pages/MemberList.jsx"
-import MemberProfile from "views/Pages/MemberProfile.jsx"
-import MultipleRecipients from "views/Pages/MultipleRecipients.jsx"
-import RegisterPage from "views/Pages/RegisterPage.jsx"
-import RegisterMember from "views/Pages/RegisterMember.jsx"
-import Relationship from "views/Pages/Relationship.jsx"
-import UserProfile from "views/Pages/UserProfile.jsx"
+import AdminList from "views/Pages/AdminList.jsx";
+import AdminProfile from "views/Pages/AdminProfile.jsx";
+import Charts from "views/Charts/Charts.jsx";
+import CreateSmsGroup from "views/Pages/CreateSMSGroup.jsx";
+import Dashboard from "views/Dashboard/Dashboard.jsx";
+import EditProfile from "views/Pages/EditProfile.jsx";
+import ErrorPage from "views/Pages/ErrorPage.jsx";
+import FundsIn from "views/Pages/FundsIn.jsx";
+import FundsList from "views/Pages/FundsList.jsx";
+import FundsOut from "views/Pages/FundsOut.jsx";
+import GroupSms from "views/Pages/GroupSms.jsx";
+import IndividualSMS from "views/Pages/IndividualSMS.jsx";
+import LockScreenPage from "views/Pages/LockScreenPage.jsx";
+import LoginPage from "views/Pages/LoginPage.jsx";
+import MemberList from "views/Pages/MemberList.jsx";
+import MemberProfile from "views/Pages/MemberProfile.jsx";
+import MultipleRecipients from "views/Pages/MultipleRecipients.jsx";
+import RegisterPage from "views/Pages/RegisterPage.jsx";
+import RegisterMember from "views/Pages/RegisterMember.jsx";
+import Relationship from "views/Pages/Relationship.jsx";
+import UserProfile from "views/Pages/UserProfile.jsx";
 
 // @material-ui/icons
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
-import DashboardIcon from "@material-ui/icons/Dashboard"
-import Face from "@material-ui/icons/Face"
-import Lock from "@material-ui/icons/Lock"
-import Call from "@material-ui/icons/Call"
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import Face from "@material-ui/icons/Face";
+import Lock from "@material-ui/icons/Lock";
+import Call from "@material-ui/icons/Call";
 
 var dashRoutes = [
   {
@@ -146,6 +147,13 @@ var dashRoutes = [
         mini: "GS",
         component: GroupSms,
         layout: "/admin"
+      },
+      {
+        path: "/create-group",
+        name: "Create Custom Group",
+        mini: "CG",
+        component: CreateSmsGroup,
+        layout: "/admin"
       }
     ]
   },
@@ -210,5 +218,5 @@ var dashRoutes = [
       }
     ]
   }
-]
-export default dashRoutes
+];
+export default dashRoutes;
