@@ -1,1 +1,1 @@
-export const backendAPI = 'http://34.68.158.39:5002'
+export const backendAPI = 'https://api.houseofdestiny.or.ke'
