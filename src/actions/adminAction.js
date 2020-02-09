@@ -1,7 +1,9 @@
-import axios from "axios"
-import { GET_ERRORS, GET_ADMINS, GET_ADMIN } from "./types"
-const backendApi = "http://34.68.158.39:5002/admin"
+import axios from 'axios'
+import { GET_ERRORS, GET_ADMINS, GET_ADMIN } from './types'
 
+import { backendAPI } from '../config/config'
+
+const backendApi = `${backendAPI}/admin`
 //Get all admins
 export const listAdmins = history => dispatch => {
   axios
@@ -13,9 +15,9 @@ export const listAdmins = history => dispatch => {
           payload: res.data
         })
       } else if (res.status === 403) {
-        history.push("/admin/dashboard")
+        history.push('/admin/dashboard')
       } else {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
     })
     .catch(err => {
@@ -23,7 +25,7 @@ export const listAdmins = history => dispatch => {
         type: GET_ADMINS,
         payload: {}
       })
-      history.push("/auth/login")
+      history.push('/auth/login')
     })
 }
 
@@ -37,11 +39,11 @@ export const listAdmin = (email, history) => dispatch => {
           type: GET_ADMIN,
           payload: res.data.user
         })
-        history.push("/admin/admin-profile")
+        history.push('/admin/admin-profile')
       } else if (res.status === 403) {
-        history.push("/admin/dashboard")
+        history.push('/admin/dashboard')
       } else {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
     })
     .catch(err => {
@@ -49,7 +51,7 @@ export const listAdmin = (email, history) => dispatch => {
         type: GET_ADMIN,
         payload: null
       })
-      history.push("/auth/login")
+      history.push('/auth/login')
     })
 }
 
@@ -70,12 +72,12 @@ export const postUpdateAuth = (authBody, history) => dispatch => {
       if (res.status === 200) {
         return res
       } else if (res.status === 403) {
-        history.push("/admin/dashboard")
+        history.push('/admin/dashboard')
       } else {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
     })
     .catch(err => {
-      history.push("/auth/login")
+      history.push('/auth/login')
     })
 }

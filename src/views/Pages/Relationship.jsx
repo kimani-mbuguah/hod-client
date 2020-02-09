@@ -1,54 +1,48 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 // react component for creating dynamic tables
-import ReactTable from "react-table"
+import ReactTable from 'react-table'
 
-import SelectSearch from "react-select-search"
+import SelectSearch from 'react-select-search'
 
 //redux manenos
-import { connect } from "react-redux"
-import compose from "recompose/compose"
-import { css } from "@emotion/core"
-import ClipLoader from "react-spinners/ClipLoader"
-import { withRouter } from "react-router-dom"
-import { listRelationshipMembers } from "../../actions/memberActions"
-import { postRelationship } from "../../actions/memberActions"
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+import { css } from '@emotion/core'
+import ClipLoader from 'react-spinners/ClipLoader'
+import { withRouter } from 'react-router-dom'
+import { listRelationshipMembers } from '../../actions/memberActions'
+import { postRelationship } from '../../actions/memberActions'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles"
+import withStyles from '@material-ui/core/styles/withStyles'
 // @material-ui/icons
-import AddAlert from "@material-ui/icons/AddAlert"
-import Assignment from "@material-ui/icons/Assignment"
-import FormControl from "@material-ui/core/FormControl"
-import Dvr from "@material-ui/icons/Dvr"
-import Favorite from "@material-ui/icons/Favorite"
-import Visibility from "@material-ui/icons/Visibility"
-import Chat from "@material-ui/icons/Chat"
-import Close from "@material-ui/icons/Close"
-import Contacts from "@material-ui/icons/Contacts"
-import InputLabel from "@material-ui/core/InputLabel"
-import Select from "@material-ui/core/Select"
-import MenuItem from "@material-ui/core/MenuItem"
+import AddAlert from '@material-ui/icons/AddAlert'
+import FormControl from '@material-ui/core/FormControl'
+
+import InputLabel from '@material-ui/core/InputLabel'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx"
-import GridItem from "components/Grid/GridItem.jsx"
-import Button from "components/CustomButtons/Button.jsx"
-import Card from "components/Card/Card.jsx"
-import CardBody from "components/Card/CardBody.jsx"
-import CardIcon from "components/Card/CardIcon.jsx"
-import CardHeader from "components/Card/CardHeader.jsx"
-import CustomInput from "components/CustomInput/CustomInput.jsx"
-import Snackbar from "components/Snackbar/Snackbar.jsx"
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx"
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
+import Button from 'components/CustomButtons/Button.jsx'
+import Card from 'components/Card/Card.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CardIcon from 'components/Card/CardIcon.jsx'
+import CardHeader from 'components/Card/CardHeader.jsx'
+import Snackbar from 'components/Snackbar/Snackbar.jsx'
+import { cardTitle } from 'assets/jss/material-dashboard-pro-react.jsx'
 
-import "./style.css"
+import './style.css'
 
 const styles = {
   cardIconTitle: {
     ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px"
+    marginTop: '15px',
+    marginBottom: '0px'
   }
 }
 
@@ -72,9 +66,9 @@ class MemberList extends React.Component {
     this.state = {
       loaded: false,
       relationshipList: [],
-      member: "",
-      relatedTo: "",
-      relationship: ""
+      member: '',
+      relatedTo: '',
+      relationship: ''
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -92,11 +86,11 @@ class MemberList extends React.Component {
   }
 
   onSelectChange(e) {
-    this.setState({ ["member"]: e.value })
+    this.setState({ ['member']: e.value })
   }
 
   onSelectRelatedToChange(e) {
-    this.setState({ ["relatedTo"]: e.value })
+    this.setState({ ['relatedTo']: e.value })
   }
 
   async onSubmit(e) {
@@ -113,13 +107,13 @@ class MemberList extends React.Component {
       !this.state.relatedTo ||
       !this.state.relationship
     ) {
-      this.showNotification("tl")
+      this.showNotification('tl')
     } else {
       await this.props
         .postRelationship(relationshipBody, this.props.history)
         .then(response => {
           if (response.status == 200) {
-            this.showNotification("tr")
+            this.showNotification('tr')
           }
         })
     }
@@ -168,7 +162,7 @@ class MemberList extends React.Component {
             <Snackbar
               place="tl"
               color="danger"
-              icon={AddAlert}
+              icon={PersonAddIcon}
               message="Please Check The Form For Errors"
               open={this.state.tl}
               closeNotification={() => this.setState({ tl: false })}
@@ -178,7 +172,7 @@ class MemberList extends React.Component {
             <Card>
               <CardHeader color="rose" icon>
                 <CardIcon color="rose">
-                  <Chat />
+                  <PersonAddIcon />
                 </CardIcon>
                 <h4 className={classes.cardIconTitle}>Add Relationship</h4>
               </CardHeader>
@@ -227,8 +221,8 @@ class MemberList extends React.Component {
                         value={this.state.relationship}
                         onChange={this.handleSimple}
                         inputProps={{
-                          name: "relationship",
-                          id: "simple-relationship"
+                          name: 'relationship',
+                          id: 'simple-relationship'
                         }}
                       >
                         <MenuItem
@@ -295,7 +289,7 @@ class MemberList extends React.Component {
                   <GridItem xs={12} sm={12} md={12}>
                     <div className={classes.center}>
                       <Button color="rose" type="submit">
-                        SEND
+                        ADD
                       </Button>
                     </div>
                   </GridItem>
@@ -311,9 +305,9 @@ class MemberList extends React.Component {
       <div className="sweet-loading">
         <ClipLoader
           css={override}
-          sizeUnit={"px"}
+          sizeUnit={'px'}
           size={150}
-          color={"#123abc"}
+          color={'#123abc'}
           loading={this.state.loading}
         />
       </div>

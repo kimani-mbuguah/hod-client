@@ -1,63 +1,60 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 // react component plugin for creating a beautiful datetime dropdown picker
-import Datetime from "react-datetime"
+import Datetime from 'react-datetime'
 
 //redux manenos
-import { connect } from "react-redux"
-import compose from "recompose/compose"
-import { withRouter } from "react-router-dom"
-import { registerMember } from "../../actions/memberActions"
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+import { withRouter } from 'react-router-dom'
+import { registerMember } from '../../actions/memberActions'
 
-import PhoneInput from "react-phone-input-2"
-import "react-phone-input-2/lib/style.css"
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles"
-import InputLabel from "@material-ui/core/InputLabel"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
-import MenuItem from "@material-ui/core/MenuItem"
+import withStyles from '@material-ui/core/styles/withStyles'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
 // @material-ui/icons
-import PermIdentity from "@material-ui/icons/PermIdentity"
-import AddAlert from "@material-ui/icons/AddAlert"
+import PermIdentity from '@material-ui/icons/PermIdentity'
+import AddAlert from '@material-ui/icons/AddAlert'
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx"
-import GridItem from "components/Grid/GridItem.jsx"
-import Button from "components/CustomButtons/Button.jsx"
-import CustomInput from "components/CustomInput/CustomInput.jsx"
-import Clearfix from "components/Clearfix/Clearfix.jsx"
-import Card from "components/Card/Card.jsx"
-import CardBody from "components/Card/CardBody.jsx"
-import CardHeader from "components/Card/CardHeader.jsx"
-import CardIcon from "components/Card/CardIcon.jsx"
-import Snackbar from "components/Snackbar/Snackbar.jsx"
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
+import Button from 'components/CustomButtons/Button.jsx'
+import CustomInput from 'components/CustomInput/CustomInput.jsx'
+import Clearfix from 'components/Clearfix/Clearfix.jsx'
+import Card from 'components/Card/Card.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CardHeader from 'components/Card/CardHeader.jsx'
+import CardIcon from 'components/Card/CardIcon.jsx'
+import Snackbar from 'components/Snackbar/Snackbar.jsx'
 
-import userProfileStyles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.jsx"
-
-import avatar from "assets/img/faces/marc.jpg"
-import { classExpression } from "@babel/types"
+import userProfileStyles from 'assets/jss/material-dashboard-pro-react/views/userProfileStyles.jsx'
 
 const styles = {
-  width: "100%",
-  height: "39px"
+  width: '100%',
+  height: '39px'
 }
 
 class RegisterMember extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      fullName: "",
-      phoneNumber: "",
-      email: "",
-      occupation: "",
-      ministry: "",
-      city: "",
-      county: "",
-      postalCode: "",
-      about: "",
+      fullName: '',
+      phoneNumber: '',
+      email: '',
+      occupation: '',
+      ministry: '',
+      city: '',
+      county: '',
+      postalCode: '',
+      about: '',
       errors: {},
       tl: false,
       tc: false,
@@ -67,7 +64,7 @@ class RegisterMember extends React.Component {
       br: false
     }
     this.preStyle = {
-      display: "block"
+      display: 'block'
     }
 
     this.onChange = this.onChange.bind(this)
@@ -91,7 +88,7 @@ class RegisterMember extends React.Component {
     e.preventDefault()
     const newMember = {
       fullName: this.state.fullName,
-      phoneNumber: this.state.phoneNumber.replace(/\s/g, ""),
+      phoneNumber: this.state.phoneNumber.split(' ').join(''),
       email: this.state.email,
       occupation: this.state.occupation,
       city: this.state.city,
@@ -105,23 +102,23 @@ class RegisterMember extends React.Component {
       .then(response => {
         if (response.status == 200) {
           this.setState({
-            fullName: "",
-            phoneNumber: "",
-            email: "",
-            occupation: "",
-            ministry: "",
-            city: "",
-            county: "",
-            postalCode: "",
-            about: ""
+            fullName: '',
+            phoneNumber: '',
+            email: '',
+            occupation: '',
+            ministry: '',
+            city: '',
+            county: '',
+            postalCode: '',
+            about: ''
           })
-          this.showNotification("tc")
+          this.showNotification('tc')
         } else if (response.status == 400) {
-          this.showNotification("bc")
+          this.showNotification('bc')
         }
       })
       .catch(error => {
-        this.showNotification("bc")
+        this.showNotification('bc')
       })
   }
 
@@ -144,9 +141,9 @@ class RegisterMember extends React.Component {
     const { classes } = this.props
     const { errors } = this.props
 
-    let errorOutput = ""
+    let errorOutput = ''
     for (let property in errors) {
-      errorOutput += property + ": " + errors[property] + "; "
+      errorOutput += property + ': ' + errors[property] + '; '
     }
 
     return (
@@ -184,7 +181,7 @@ class RegisterMember extends React.Component {
                     <PermIdentity />
                   </CardIcon>
                   <h4 className={classes.cardIconTitle}>
-                    Member Registration -{" "}
+                    Member Registration -{' '}
                     <small>
                       Fill in member details to create their profile
                     </small>
@@ -199,7 +196,7 @@ class RegisterMember extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "fullName",
+                          name: 'fullName',
                           value: this.state.fullName,
                           onChange: this.onChange,
                           required: true,
@@ -210,28 +207,15 @@ class RegisterMember extends React.Component {
                     <GridItem xs={12} sm={12} md={6}>
                       <br></br>
                       <PhoneInput
-                        country={"ke"}
+                        country={'ke'}
                         value={this.state.phoneNumber}
                         onChange={this.handleOnChange}
                         inputStyle={styles}
-                        containerStyle={{ marginBottom: "3%" }}
+                        containerStyle={{ marginBottom: '3%' }}
                         inputExtraProps={{
                           required: true
                         }}
                       />
-
-                      {/* <CustomInput
-                        labelText="Phone Number"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          name: "phoneNumber",
-                          value: this.state.phoneNumber,
-                          onChange: this.onChange,
-                          error: errors.isPhoneNumberError
-                        }}
-                      /> */}
                     </GridItem>
                   </GridContainer>
                   <GridContainer>
@@ -243,7 +227,7 @@ class RegisterMember extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "email",
+                          name: 'email',
                           value: this.state.email,
                           onChange: this.onChange,
                           error: errors.isEmailError
@@ -258,7 +242,7 @@ class RegisterMember extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "occupation",
+                          name: 'occupation',
                           value: this.state.occupation,
                           onChange: this.onChange,
                           error: errors.isOccupationError,
@@ -287,8 +271,8 @@ class RegisterMember extends React.Component {
                           value={this.state.ministry}
                           onChange={this.handleSimple}
                           inputProps={{
-                            name: "ministry",
-                            id: "ministry",
+                            name: 'ministry',
+                            id: 'ministry',
                             error: errors.isMinistryError
                           }}
                         >
@@ -342,7 +326,7 @@ class RegisterMember extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "city",
+                          name: 'city',
                           value: this.state.city,
                           onChange: this.onChange,
                           error: errors.isCityError
@@ -357,7 +341,7 @@ class RegisterMember extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "county",
+                          name: 'county',
                           value: this.state.county,
                           onChange: this.onChange,
                           error: errors.isCountyError
@@ -367,7 +351,7 @@ class RegisterMember extends React.Component {
                   </GridContainer>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
-                      <InputLabel style={{ color: "#AAAAAA" }}>
+                      <InputLabel style={{ color: '#AAAAAA' }}>
                         About Member
                       </InputLabel>
                       <CustomInput
@@ -377,7 +361,7 @@ class RegisterMember extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "about",
+                          name: 'about',
                           value: this.state.about,
                           onChange: this.onChange,
                           error: errors.isAboutError,

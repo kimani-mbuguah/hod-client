@@ -1,33 +1,33 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { sendGroupSms } from "../../actions/memberActions"
+import { sendGroupSms } from '../../actions/memberActions'
 
-import { connect } from "react-redux"
-import compose from "recompose/compose"
-import { withRouter } from "react-router-dom"
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+import { withRouter } from 'react-router-dom'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles"
-import FormControl from "@material-ui/core/FormControl"
-import InputLabel from "@material-ui/core/InputLabel"
-import Select from "@material-ui/core/Select"
-import MenuItem from "@material-ui/core/MenuItem"
+import withStyles from '@material-ui/core/styles/withStyles'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
 // @material-ui/icons
-import AddAlert from "@material-ui/icons/AddAlert"
-import AvTimer from "@material-ui/icons/AvTimer"
+import AddAlert from '@material-ui/icons/AddAlert'
+import AvTimer from '@material-ui/icons/AvTimer'
 
 // core components
-import Button from "components/CustomButtons/Button.jsx"
-import GridContainer from "components/Grid/GridContainer.jsx"
-import GridItem from "components/Grid/GridItem.jsx"
-import Card from "components/Card/Card.jsx"
-import CardBody from "components/Card/CardBody.jsx"
-import CustomInput from "components/CustomInput/CustomInput.jsx"
-import Snackbar from "components/Snackbar/Snackbar.jsx"
+import Button from 'components/CustomButtons/Button.jsx'
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
+import Card from 'components/Card/Card.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CustomInput from 'components/CustomInput/CustomInput.jsx'
+import Snackbar from 'components/Snackbar/Snackbar.jsx'
 
-import extendedFormsStyle from "assets/jss/material-dashboard-pro-react/views/extendedFormsStyle.jsx"
+import extendedFormsStyle from 'assets/jss/material-dashboard-pro-react/views/extendedFormsStyle.jsx'
 
 class GroupSMS extends React.Component {
   constructor(props) {
@@ -35,8 +35,8 @@ class GroupSMS extends React.Component {
     this.state = {
       loaded: false,
       loading: true,
-      simpleSelect: "",
-      sms: ""
+      simpleSelect: '',
+      sms: ''
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -60,11 +60,11 @@ class GroupSMS extends React.Component {
     }
 
     if (!this.state.simpleSelect || !this.state.sms) {
-      this.showNotification("tl")
+      this.showNotification('tl')
     } else {
       await this.props.sendGroupSms(sms, this.props.history).then(response => {
         if (response.status == 200) {
-          this.showNotification("tr")
+          this.showNotification('tr')
         }
       })
     }
@@ -94,7 +94,7 @@ class GroupSMS extends React.Component {
             place="tr"
             color="success"
             icon={AddAlert}
-            message="Sending Messages to the selected members..."
+            message="Sending Messages to members of the selected ministry..."
             open={this.state.tr}
             closeNotification={() => this.setState({ tr: false })}
             close
@@ -116,7 +116,7 @@ class GroupSMS extends React.Component {
                 <form onSubmit={this.onSubmit}>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
-                      <legend>Group SMS</legend>
+                      <legend>Ministry SMS</legend>
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12} lg={12}>
                           <FormControl
@@ -127,7 +127,7 @@ class GroupSMS extends React.Component {
                               htmlFor="simple-select"
                               className={classes.selectLabel}
                             >
-                              Choose Group To Send To
+                              Choose Ministry To Send To
                             </InputLabel>
                             <Select
                               MenuProps={{
@@ -139,8 +139,8 @@ class GroupSMS extends React.Component {
                               value={this.state.simpleSelect}
                               onChange={this.handleSimple}
                               inputProps={{
-                                name: "simpleSelect",
-                                id: "simple-select"
+                                name: 'simpleSelect',
+                                id: 'simple-select'
                               }}
                             >
                               <MenuItem
@@ -185,7 +185,7 @@ class GroupSMS extends React.Component {
                         </GridItem>
 
                         <GridItem xs={12} sm={12} md={12}>
-                          <InputLabel style={{ color: "#AAAAAA" }}>
+                          <InputLabel style={{ color: '#AAAAAA' }}>
                             Message
                           </InputLabel>
                           <CustomInput
@@ -194,7 +194,7 @@ class GroupSMS extends React.Component {
                               fullWidth: true
                             }}
                             inputProps={{
-                              name: "sms",
+                              name: 'sms',
                               multiline: true,
                               rows: 5,
                               value: this.state.sms,

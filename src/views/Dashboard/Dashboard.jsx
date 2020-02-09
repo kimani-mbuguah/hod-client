@@ -1,61 +1,61 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 // react plugin for creating charts
-import ChartistGraph from "react-chartist"
+import ChartistGraph from 'react-chartist'
 // react plugin for creating vector maps
-import { VectorMap } from "react-jvectormap"
-import moment from "moment"
-import BigCalendar from "react-big-calendar"
+import { VectorMap } from 'react-jvectormap'
+import moment from 'moment'
+import BigCalendar from 'react-big-calendar'
 
 //redux manenos
-import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
-import compose from "recompose/compose"
-import { getMembersCount } from "../../actions/memberActions"
-import { getFundsData } from "../../actions/fundsAction"
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import compose from 'recompose/compose'
+import { getMembersCount } from '../../actions/memberActions'
+import { getFundsData } from '../../actions/fundsAction'
 
-import SweetAlert from "react-bootstrap-sweetalert"
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles"
-import Tooltip from "@material-ui/core/Tooltip"
-import Icon from "@material-ui/core/Icon"
+import withStyles from '@material-ui/core/styles/withStyles'
+import Tooltip from '@material-ui/core/Tooltip'
+import Icon from '@material-ui/core/Icon'
 
 // @material-ui/icons
 // import ContentCopy from "@material-ui/icons/ContentCopy";
-import Store from "@material-ui/icons/Store"
-import Timeline from "@material-ui/icons/Timeline"
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
+import Store from '@material-ui/icons/Store'
+import Timeline from '@material-ui/icons/Timeline'
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
 
 // import InfoOutline from "@material-ui/icons/InfoOutline";
-import Warning from "@material-ui/icons/Warning"
-import DateRange from "@material-ui/icons/DateRange"
-import LocalOffer from "@material-ui/icons/LocalOffer"
-import Update from "@material-ui/icons/Update"
-import ArrowUpward from "@material-ui/icons/ArrowUpward"
-import AccessTime from "@material-ui/icons/AccessTime"
-import Refresh from "@material-ui/icons/Refresh"
-import Edit from "@material-ui/icons/Edit"
-import Place from "@material-ui/icons/Place"
-import ArtTrack from "@material-ui/icons/ArtTrack"
-import Language from "@material-ui/icons/Language"
+import Warning from '@material-ui/icons/Warning'
+import DateRange from '@material-ui/icons/DateRange'
+import LocalOffer from '@material-ui/icons/LocalOffer'
+import Update from '@material-ui/icons/Update'
+import ArrowUpward from '@material-ui/icons/ArrowUpward'
+import AccessTime from '@material-ui/icons/AccessTime'
+import Refresh from '@material-ui/icons/Refresh'
+import Edit from '@material-ui/icons/Edit'
+import Place from '@material-ui/icons/Place'
+import ArtTrack from '@material-ui/icons/ArtTrack'
+import Language from '@material-ui/icons/Language'
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx"
-import GridItem from "components/Grid/GridItem.jsx"
-import Table from "components/Table/Table.jsx"
-import Button from "components/CustomButtons/Button.jsx"
-import Danger from "components/Typography/Danger.jsx"
-import Card from "components/Card/Card.jsx"
-import CardHeader from "components/Card/CardHeader.jsx"
-import CardIcon from "components/Card/CardIcon.jsx"
-import CardBody from "components/Card/CardBody.jsx"
-import CardFooter from "components/Card/CardFooter.jsx"
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
+import Table from 'components/Table/Table.jsx'
+import Button from 'components/CustomButtons/Button.jsx'
+import Danger from 'components/Typography/Danger.jsx'
+import Card from 'components/Card/Card.jsx'
+import CardHeader from 'components/Card/CardHeader.jsx'
+import CardIcon from 'components/Card/CardIcon.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CardFooter from 'components/Card/CardFooter.jsx'
 
-import dashboardStyle from "assets/jss/material-dashboard-pro-react/views/dashboardStyle"
+import dashboardStyle from 'assets/jss/material-dashboard-pro-react/views/dashboardStyle'
 const events = []
 
-var Chartist = require("chartist")
+var Chartist = require('chartist')
 var delays = 80,
   durations = 500
 var delays2 = 80,
@@ -68,7 +68,7 @@ class Dashboard extends React.Component {
     super(props)
     this.state = {
       loaded: false,
-      count: "",
+      count: '',
       events: events
     }
   }
@@ -82,16 +82,16 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
-      this.props.history.push("/auth/login")
+      this.props.history.push('/auth/login')
+    } else {
+      this.props.getMembersCount(this.props.history).then(res => {
+        this.setState({ loaded: true, count: res.data.count })
+      })
+
+      this.props.getFundsData(this.props.history).then(() => {
+        this.setState({ loaded: true })
+      })
     }
-
-    this.props.getMembersCount().then(res => {
-      this.setState({ loaded: true, count: res.data.count })
-    })
-
-    this.props.getFundsData(this.props.history).then(() => {
-      this.setState({ loaded: true })
-    })
   }
 
   render() {
@@ -102,16 +102,19 @@ class Dashboard extends React.Component {
       const { weeklyIn } = this.props.funds.funds
       const { weeklyOut } = this.props.funds.funds
       const { pieData } = this.props.funds.funds
-      if (Object.keys(pieData).length > 0) {
+      if (pieData && Object.keys(pieData).length > 0) {
         totalIn = Number(pieData.totalIn)
         totalOut = Number(pieData.totalOut)
+      } else {
+        totalIn = 0
+        totalOut = 0
       }
       if (weeklyIn.length > 0) {
         const weeklyInData = weeklyIn[0]
 
         weeklyInChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [
               [
                 weeklyInData.sun,
@@ -138,11 +141,11 @@ class Dashboard extends React.Component {
             low: 0,
             high: 5000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -156,14 +159,14 @@ class Dashboard extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -173,7 +176,7 @@ class Dashboard extends React.Component {
       } else {
         weeklyInChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [[0, 0, 0, 0, 0, 0, 0]]
           },
           options: {
@@ -190,11 +193,11 @@ class Dashboard extends React.Component {
             low: 0,
             high: 1000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -208,14 +211,14 @@ class Dashboard extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -228,7 +231,7 @@ class Dashboard extends React.Component {
         const weeklyOutData = weeklyOut[0]
         weeklyOutChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [
               [
                 weeklyOutData.sun,
@@ -255,11 +258,11 @@ class Dashboard extends React.Component {
             low: 0,
             high: 5000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -273,14 +276,14 @@ class Dashboard extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -290,7 +293,7 @@ class Dashboard extends React.Component {
       } else {
         weeklyOutChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [[0, 0, 0, 0, 0, 0, 0]]
           },
           options: {
@@ -307,11 +310,11 @@ class Dashboard extends React.Component {
             low: 0,
             high: 1000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -325,14 +328,14 @@ class Dashboard extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -343,7 +346,7 @@ class Dashboard extends React.Component {
     } else {
       weeklyOutChartData = {
         data: {
-          labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+          labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
           series: [[0, 0, 0, 0, 0, 0, 0]]
         },
         options: {
@@ -360,11 +363,11 @@ class Dashboard extends React.Component {
           low: 0,
           high: 1000,
           showPoint: true,
-          height: "300px"
+          height: '300px'
         },
         animation: {
           draw: function(data) {
-            if (data.type === "line" || data.type === "area") {
+            if (data.type === 'line' || data.type === 'area') {
               data.element.animate({
                 d: {
                   begin: 600,
@@ -378,14 +381,14 @@ class Dashboard extends React.Component {
                   easing: Chartist.Svg.Easing.easeOutQuint
                 }
               })
-            } else if (data.type === "point") {
+            } else if (data.type === 'point') {
               data.element.animate({
                 opacity: {
                   begin: (data.index + 1) * delays,
                   dur: durations,
                   from: 0,
                   to: 1,
-                  easing: "ease"
+                  easing: 'ease'
                 }
               })
             }
@@ -395,7 +398,7 @@ class Dashboard extends React.Component {
 
       weeklyInChartData = {
         data: {
-          labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+          labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
           series: [[0, 0, 0, 0, 0, 0, 0]]
         },
         options: {
@@ -412,11 +415,11 @@ class Dashboard extends React.Component {
           low: 0,
           high: 1000,
           showPoint: true,
-          height: "300px"
+          height: '300px'
         },
         animation: {
           draw: function(data) {
-            if (data.type === "line" || data.type === "area") {
+            if (data.type === 'line' || data.type === 'area') {
               data.element.animate({
                 d: {
                   begin: 600,
@@ -430,14 +433,14 @@ class Dashboard extends React.Component {
                   easing: Chartist.Svg.Easing.easeOutQuint
                 }
               })
-            } else if (data.type === "point") {
+            } else if (data.type === 'point') {
               data.element.animate({
                 opacity: {
                   begin: (data.index + 1) * delays,
                   dur: durations,
                   from: 0,
                   to: 1,
-                  easing: "ease"
+                  easing: 'ease'
                 }
               })
             }
@@ -476,7 +479,7 @@ class Dashboard extends React.Component {
                 </CardIcon>
                 <p className={classes.cardCategory}>Members</p>
                 <h3 className={classes.cardTitle}>
-                  {this.props.member.count}{" "}
+                  {this.props.member.count}{' '}
                 </h3>
               </CardHeader>
               <CardFooter stats>

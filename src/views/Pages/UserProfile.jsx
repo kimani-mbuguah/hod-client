@@ -1,34 +1,37 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { connect } from "react-redux"
-import compose from "recompose/compose"
-import { withRouter } from "react-router-dom"
-import { css } from "@emotion/core"
+import classNames from 'classnames'
 
-import { getActiveUser } from "../../actions/adminAction"
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+import { withRouter } from 'react-router-dom'
+import { css } from '@emotion/core'
+
+import { getActiveUser } from '../../actions/adminAction'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles"
+import withStyles from '@material-ui/core/styles/withStyles'
 
 // core components
-import ClipLoader from "react-spinners/BounceLoader"
-import GridContainer from "components/Grid/GridContainer.jsx"
-import GridItem from "components/Grid/GridItem.jsx"
-import Card from "components/Card/Card.jsx"
-import CardBody from "components/Card/CardBody.jsx"
-import CardAvatar from "components/Card/CardAvatar.jsx"
+import Button from 'components/CustomButtons/Button.jsx'
+import ClipLoader from 'react-spinners/BounceLoader'
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
+import Card from 'components/Card/Card.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CardAvatar from 'components/Card/CardAvatar.jsx'
 
-import userProfileStyles from "assets/jss/material-dashboard-pro-react/views/userProfileStyles.jsx"
+import userProfileStyles from 'assets/jss/material-dashboard-pro-react/views/userProfileStyles.jsx'
 
-import avatar from "assets/img/faces/marc.jpg"
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx"
+import avatar from 'assets/img/faces/marc.jpg'
+import { cardTitle } from 'assets/jss/material-dashboard-pro-react.jsx'
 
 const styles = {
   cardIconTitle: {
     ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px"
+    marginTop: '15px',
+    marginBottom: '0px'
   }
 }
 
@@ -66,32 +69,50 @@ class UserProfile extends React.Component {
 
   render() {
     const { classes } = this.props
+    const imageClasses = classNames(
+      classes.imgRaised,
+      classes.imgRoundedCircle,
+      classes.imgFluid
+    )
 
     if (this.state.loaded) {
       const user = this.state.activeUser
-      const userName = user.firstName + " " + user.lastName
+      const userName = user.firstName + ' ' + user.lastName
       return (
         <div>
-          <GridContainer>
+          <GridContainer justify="center">
             <GridItem xs={12} sm={12} md={12}>
-              <Card profile>
-                <CardAvatar profile>
-                  <a href="#" onClick={e => e.preventDefault()}>
-                    <img
-                      src={user.profilePic || this.state.url || avatar}
-                      alt="..."
-                    />
-                  </a>
-                </CardAvatar>
-                <CardBody profile>
-                  <h6 className={classes.cardCategory}>{userName}</h6>
-                  <h6 className={classes.cardCategory}>{user.phoneNumber}</h6>
-                  <h4 className={classes.cardTitle}>{user.email}</h4>
-                  <h6 className={classes.cardCategory}>{user.about}</h6>
-                </CardBody>
-              </Card>
+              <div className={classes.profile}>
+                <div>
+                  <img
+                    src={this.state.profilePic || this.state.url || avatar}
+                    alt="..."
+                    className={imageClasses}
+                  />
+                </div>
+                <div className={classes.name}>
+                  <h3 className={classes.title}>{userName}</h3>
+                  <h6>{user.phoneNumber}</h6>
+                  <h6>{user.email}</h6>
+                  <Button justIcon link className={classes.margin5}>
+                    <i className={'fab fa-twitter'} />
+                  </Button>
+                  <Button justIcon link className={classes.margin5}>
+                    <i className={'fab fa-instagram'} />
+                  </Button>
+                  <Button justIcon link className={classes.margin5}>
+                    <i className={'fab fa-facebook'} />
+                  </Button>
+                </div>
+              </div>
             </GridItem>
+          </GridContainer>
 
+          <div className={classes.description}>
+            <p>{user.about}</p>
+          </div>
+
+          <GridContainer>
             <GridItem xs={12} sm={12} md={4}>
               <Card profile>
                 <CardBody profile>
@@ -116,7 +137,7 @@ class UserProfile extends React.Component {
                   <h4 className={classes.cardTitleWhite}>Location</h4>
                   <h4 className={classes.cardCategory}>
                     {user.county}
-                    {"/"}
+                    {'/'}
                     {user.city}
                   </h4>
                 </CardBody>
@@ -130,9 +151,9 @@ class UserProfile extends React.Component {
         <div className="sweet-loading">
           <ClipLoader
             css={override}
-            sizeUnit={"px"}
+            sizeUnit={'px'}
             size={150}
-            color={"#123abc"}
+            color={'#123abc'}
             loading={this.state.loading}
           />
         </div>

@@ -1,54 +1,46 @@
-import React from "react";
-import PropTypes from "prop-types";
-// react component for creating dynamic tables
-import ReactTable from "react-table";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import SelectSearch from "react-select-search";
-import TagsInput from "react-tagsinput";
+import SelectSearch from 'react-select-search'
+import TagsInput from 'react-tagsinput'
 
 //redux manenos
-import { connect } from "react-redux";
-import compose from "recompose/compose";
-import { css } from "@emotion/core";
-import ClipLoader from "react-spinners/ClipLoader";
-import { withRouter } from "react-router-dom";
-import { listSmsMembers } from "../../actions/memberActions";
-import { createCustomGroup } from "../../actions/memberActions";
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+import { css } from '@emotion/core'
+import ClipLoader from 'react-spinners/ClipLoader'
+import { withRouter } from 'react-router-dom'
+import { listSmsMembers } from '../../actions/memberActions'
+import { createCustomGroup } from '../../actions/memberActions'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles'
 // @material-ui/icons
-import AddAlert from "@material-ui/icons/AddAlert";
-import Assignment from "@material-ui/icons/Assignment";
-import Dvr from "@material-ui/icons/Dvr";
-import Favorite from "@material-ui/icons/Favorite";
-import Visibility from "@material-ui/icons/Visibility";
-import Chat from "@material-ui/icons/Chat";
-import Close from "@material-ui/icons/Close";
-import Contacts from "@material-ui/icons/Contacts";
-import InputLabel from "@material-ui/core/InputLabel";
+import AddAlert from '@material-ui/icons/AddAlert'
+import Chat from '@material-ui/icons/Chat'
+import InputLabel from '@material-ui/core/InputLabel'
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardIcon from "components/Card/CardIcon.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Snackbar from "components/Snackbar/Snackbar.jsx";
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx";
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
+import Button from 'components/CustomButtons/Button.jsx'
+import Card from 'components/Card/Card.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CardIcon from 'components/Card/CardIcon.jsx'
+import CardHeader from 'components/Card/CardHeader.jsx'
+import CustomInput from 'components/CustomInput/CustomInput.jsx'
+import Snackbar from 'components/Snackbar/Snackbar.jsx'
+import { cardTitle } from 'assets/jss/material-dashboard-pro-react.jsx'
 
-import "./style.css";
+import './style.css'
 
 const styles = {
   cardIconTitle: {
     ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px"
+    marginTop: '15px',
+    marginBottom: '0px'
   }
-};
+}
 
 const override = css`
   display: block;
@@ -62,81 +54,81 @@ const override = css`
   right: 0;
 
   margin: auto;
-`;
+`
 
 class CreateSmsGroup extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       loaded: false,
       loading: true,
       smsList: [],
       selectedMembers: [],
-      contact: "",
-      name: ""
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this);
+      contact: '',
+      name: ''
+    }
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onSelectChange = this.onSelectChange.bind(this)
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   onSelectChange(e) {
     this.setState({
       selectedMembers: [...this.state.selectedMembers, e.value]
-    });
+    })
   }
 
   async onSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     const groupDetails = {
       members: this.state.selectedMembers,
       name: this.state.name
-    };
+    }
 
     if (!this.state.selectedMembers || !this.state.name) {
-      this.showNotification("tl");
+      this.showNotification('tl')
     } else {
       await this.props
         .createCustomGroup(groupDetails, this.props.history)
         .then(response => {
           if (response.status == 200) {
-            this.showNotification("tr");
+            this.showNotification('tr')
           }
-        });
+        })
     }
   }
 
   showNotification(place) {
     if (!this.state[place]) {
-      var x = [];
-      x[place] = true;
-      this.setState(x);
+      var x = []
+      x[place] = true
+      this.setState(x)
       setTimeout(
         function() {
-          x[place] = false;
-          this.setState(x);
+          x[place] = false
+          this.setState(x)
         }.bind(this),
         6000
-      );
+      )
     }
   }
 
   async componentDidMount() {
     await this.props.listSmsMembers(this.props.history).then(() => {
-      this.setState({ loaded: true });
-      this.setState({ loading: false });
-    });
+      this.setState({ loaded: true })
+      this.setState({ loading: false })
+    })
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
 
-    const { smslist } = this.props.member;
+    const { smslist } = this.props.member
 
     if (smslist != null && smslist.length > 0) {
       return (
@@ -173,7 +165,7 @@ class CreateSmsGroup extends React.Component {
                 <form onSubmit={this.onSubmit}>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
-                      <InputLabel style={{ color: "#AAAAAA" }}>
+                      <InputLabel style={{ color: '#AAAAAA' }}>
                         Group Name
                       </InputLabel>
                       <CustomInput
@@ -182,7 +174,7 @@ class CreateSmsGroup extends React.Component {
                           fullWidth: true
                         }}
                         inputProps={{
-                          name: "name",
+                          name: 'name',
                           value: this.state.sms,
                           isRequired: true,
                           onChange: this.onChange
@@ -205,7 +197,7 @@ class CreateSmsGroup extends React.Component {
                       <legend>Selected Members</legend>
                       <TagsInput
                         value={this.state.selectedMembers}
-                        tagProps={{ className: "react-tagsinput-tag info" }}
+                        tagProps={{ className: 'react-tagsinput-tag info' }}
                       />
                     </GridItem>
                   </GridContainer>
@@ -220,20 +212,20 @@ class CreateSmsGroup extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
-      );
+      )
     }
 
     return (
       <div className="sweet-loading">
         <ClipLoader
           css={override}
-          sizeUnit={"px"}
+          sizeUnit={'px'}
           size={150}
-          color={"#123abc"}
+          color={'#123abc'}
           loading={this.state.loading}
         />
       </div>
-    );
+    )
   }
 }
 
@@ -241,11 +233,11 @@ CreateSmsGroup.propTypes = {
   classes: PropTypes.object,
   createCustomGroup: PropTypes.func.isRequired,
   listSmsMembers: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = state => ({
   member: state.member
-});
+})
 
 const enhance = compose(
   withStyles(styles),
@@ -253,6 +245,6 @@ const enhance = compose(
     mapStateToProps,
     { listSmsMembers, createCustomGroup }
   )
-);
+)
 
-export default enhance(withRouter(CreateSmsGroup));
+export default enhance(withRouter(CreateSmsGroup))

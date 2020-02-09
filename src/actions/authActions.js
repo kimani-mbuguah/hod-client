@@ -1,10 +1,12 @@
-import axios from "axios"
-import jwt_decode from "jwt-decode"
-import setAuthToken from "../utils/setAuthToken"
+import axios from 'axios'
+import jwt_decode from 'jwt-decode'
+import setAuthToken from '../utils/setAuthToken'
 
-import { GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS } from "./types"
+import { GET_ERRORS, SET_CURRENT_USER, CLEAR_ERRORS } from './types'
 
-const backendApi = "http://34.68.158.39:5002/auth"
+import { backendAPI } from '../config/config'
+
+const backendApi = `${backendAPI}/auth`
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -14,7 +16,7 @@ export const registerUser = (userData, history) => dispatch => {
       dispatch({
         type: CLEAR_ERRORS
       })
-      history.push("/auth/login")
+      history.push('/auth/login')
     })
     .catch(err => {
       dispatch({
@@ -35,7 +37,7 @@ export const loginUser = userData => dispatch => {
       // Save to localStorage
       const token = res.data.token
       // Set token to ls
-      localStorage.setItem("jwtToken", token)
+      localStorage.setItem('jwtToken', token)
       // Set token to Auth header
       setAuthToken(token)
       // Decode token to get user data
@@ -62,7 +64,7 @@ export const updateProfile = (userData, history) => dispatch => {
       dispatch({
         type: CLEAR_ERRORS
       })
-      history.push("/admin/profile")
+      history.push('/admin/profile')
     })
     .catch(err => {
       dispatch({
@@ -86,13 +88,13 @@ export const setCurrentUser = decoded => {
 // Log user out
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage
-  localStorage.removeItem("jwtToken")
+  localStorage.removeItem('jwtToken')
   // Remove auth header for future requests
   setAuthToken(false)
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}))
   //redirect user to login page
-  window.location.href = "/auth/login"
+  window.location.href = '/auth/login'
 }
 
 export const postUpdateProfilePic = (profilePicBody, history) => dispatch => {

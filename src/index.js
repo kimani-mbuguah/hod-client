@@ -14,28 +14,25 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react"
-import ReactDOM from "react-dom"
-import { createBrowserHistory } from "history"
-import { Router, Route, Switch, Redirect } from "react-router-dom"
-import { createStore, applyMiddleware } from "redux"
-import ReduxToastr from "react-redux-toastr"
-import "react-redux-toastr/lib/css/react-redux-toastr.min.css"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createBrowserHistory } from 'history'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
-import { Provider } from "react-redux"
+import { Provider } from 'react-redux'
 
-import jwt_decode from "jwt-decode"
-import setAuthToken from "./utils/setAuthToken"
-import { setCurrentUser, logoutUser } from "./actions/authActions"
-import { clearCurrentProfile } from "./actions/profileActions"
+import jwt_decode from 'jwt-decode'
+import setAuthToken from './utils/setAuthToken'
+import { setCurrentUser, logoutUser } from './actions/authActions'
+import { clearCurrentProfile } from './actions/profileActions'
 
-import AuthLayout from "layouts/Auth.jsx"
-import RtlLayout from "layouts/RTL.jsx"
-import AdminLayout from "layouts/Admin.jsx"
+import AuthLayout from 'layouts/Auth.jsx'
+import AdminLayout from 'layouts/Admin.jsx'
 
-import "assets/scss/material-dashboard-pro-react.scss?v=1.7.0"
+import 'assets/scss/material-dashboard-pro-react.scss?v=1.7.0'
 
-import store from "./store"
+import store from './store'
 
 const hist = createBrowserHistory()
 
@@ -68,5 +65,5 @@ ReactDOM.render(
       </Switch>
     </Router>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 )

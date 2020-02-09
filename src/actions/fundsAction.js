@@ -1,12 +1,15 @@
-import axios from "axios"
+import axios from 'axios'
 import {
   GET_ERRORS,
   CLEAR_ERRORS,
   GET_FUNDS_DATA,
   GET_FUNDS_LIST
-} from "./types"
+} from './types'
 
-const backendApi = "http://34.68.158.39:5002/money"
+import { backendAPI } from '../config/config'
+
+const backendApi = `${backendAPI}/money`
+
 export const postFundsIn = (fundsInData, history) => dispatch => {
   return axios
     .post(`${backendApi}/in`, fundsInData)
@@ -16,7 +19,7 @@ export const postFundsIn = (fundsInData, history) => dispatch => {
           type: CLEAR_ERRORS
         })
       } else if (res.status == 401) {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
 
       return res
@@ -41,7 +44,7 @@ export const postFundsOut = (fundsOutData, history) => dispatch => {
           type: CLEAR_ERRORS
         })
       } else if (res.status == 401) {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
 
       return res
@@ -67,11 +70,11 @@ export const getFundsData = history => dispatch => {
           payload: res.data
         })
       } else {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
     })
     .catch(err => {
-      history.push("/auth/login")
+      history.push('/auth/login')
     })
 }
 
@@ -87,13 +90,13 @@ export const getFundsList = history => dispatch => {
             payload: res.data
           })
         } else if (res.status == 403) {
-          history.push("/admin/dashboard")
+          history.push('/admin/dashboard')
         }
       } else {
-        history.push("/auth/login")
+        history.push('/auth/login')
       }
     })
     .catch(err => {
-      history.push("/auth/login")
+      history.push('/auth/login')
     })
 }

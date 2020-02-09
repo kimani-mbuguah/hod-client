@@ -1,48 +1,48 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 
 //redux manenos
-import { connect } from "react-redux"
-import compose from "recompose/compose"
-import { withRouter } from "react-router-dom"
-import { getFundsData } from "../../actions/fundsAction"
+import { connect } from 'react-redux'
+import compose from 'recompose/compose'
+import { withRouter } from 'react-router-dom'
+import { getFundsData } from '../../actions/fundsAction'
 
 // react plugin for creating charts
-import ChartistGraph from "react-chartist"
+import ChartistGraph from 'react-chartist'
 
 //clip loader
-import ClipLoader from "react-spinners/ClipLoader"
-import { css } from "@emotion/core"
+import ClipLoader from 'react-spinners/ClipLoader'
+import { css } from '@emotion/core'
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles"
+import withStyles from '@material-ui/core/styles/withStyles'
 
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline"
+import Timeline from '@material-ui/icons/Timeline'
 
 // core components
-import Heading from "components/Heading/Heading.jsx"
-import GridContainer from "components/Grid/GridContainer.jsx"
-import GridItem from "components/Grid/GridItem.jsx"
+import Heading from 'components/Heading/Heading.jsx'
+import GridContainer from 'components/Grid/GridContainer.jsx'
+import GridItem from 'components/Grid/GridItem.jsx'
 
-import Card from "components/Card/Card.jsx"
-import CardHeader from "components/Card/CardHeader.jsx"
-import CardIcon from "components/Card/CardIcon.jsx"
-import CardBody from "components/Card/CardBody.jsx"
-import CardFooter from "components/Card/CardFooter.jsx"
+import Card from 'components/Card/Card.jsx'
+import CardHeader from 'components/Card/CardHeader.jsx'
+import CardIcon from 'components/Card/CardIcon.jsx'
+import CardBody from 'components/Card/CardBody.jsx'
+import CardFooter from 'components/Card/CardFooter.jsx'
 
-import chartsStyle from "assets/jss/material-dashboard-pro-react/views/chartsStyle.jsx"
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.jsx"
+import chartsStyle from 'assets/jss/material-dashboard-pro-react/views/chartsStyle.jsx'
+import { cardTitle } from 'assets/jss/material-dashboard-pro-react.jsx'
 
 const styles = {
   cardIconTitle: {
     ...cardTitle,
-    marginTop: "15px",
-    marginBottom: "0px"
+    marginTop: '15px',
+    marginBottom: '0px'
   }
 }
 
-var Chartist = require("chartist")
+var Chartist = require('chartist')
 
 var delays = 80,
   durations = 500
@@ -112,7 +112,7 @@ class Charts extends React.Component {
 
         weeklyInChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [
               [
                 weeklyInData.sun,
@@ -139,11 +139,11 @@ class Charts extends React.Component {
             low: 0,
             high: 5000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -157,14 +157,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -175,7 +175,7 @@ class Charts extends React.Component {
         totalWeeklyIn = 0
         weeklyInChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [[0, 0, 0, 0, 0, 0, 0]]
           },
           options: {
@@ -192,11 +192,11 @@ class Charts extends React.Component {
             low: 0,
             high: 1000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -210,14 +210,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -232,7 +232,7 @@ class Charts extends React.Component {
         const weeklyOutData = weeklyOut[0]
         weeklyOutChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [
               [
                 weeklyOutData.sun,
@@ -259,11 +259,11 @@ class Charts extends React.Component {
             low: 0,
             high: 5000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -277,14 +277,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -294,7 +294,7 @@ class Charts extends React.Component {
       } else {
         weeklyOutChartData = {
           data: {
-            labels: ["sun", "mon", "tue", "wed", "thur", "fri", "sat"],
+            labels: ['sun', 'mon', 'tue', 'wed', 'thur', 'fri', 'sat'],
             series: [[0, 0, 0, 0, 0, 0, 0]]
           },
           options: {
@@ -311,11 +311,11 @@ class Charts extends React.Component {
             low: 0,
             high: 1000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -329,14 +329,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -365,18 +365,18 @@ class Charts extends React.Component {
         yearlyInChartData = {
           data: {
             labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec"
+              'jan',
+              'feb',
+              'mar',
+              'apr',
+              'may',
+              'jun',
+              'jul',
+              'aug',
+              'sep',
+              'oct',
+              'nov',
+              'dec'
             ],
             series: [
               [
@@ -409,11 +409,11 @@ class Charts extends React.Component {
             low: 0,
             high: 500000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -427,14 +427,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -446,18 +446,18 @@ class Charts extends React.Component {
         yearlyInChartData = {
           data: {
             labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec"
+              'jan',
+              'feb',
+              'mar',
+              'apr',
+              'may',
+              'jun',
+              'jul',
+              'aug',
+              'sep',
+              'oct',
+              'nov',
+              'dec'
             ],
             series: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
           },
@@ -475,11 +475,11 @@ class Charts extends React.Component {
             low: 0,
             high: 500000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -493,14 +493,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -516,18 +516,18 @@ class Charts extends React.Component {
         yearlyOutChartData = {
           data: {
             labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec"
+              'jan',
+              'feb',
+              'mar',
+              'apr',
+              'may',
+              'jun',
+              'jul',
+              'aug',
+              'sep',
+              'oct',
+              'nov',
+              'dec'
             ],
             series: [
               [
@@ -560,11 +560,11 @@ class Charts extends React.Component {
             low: 0,
             high: 500000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -578,14 +578,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -596,18 +596,18 @@ class Charts extends React.Component {
         yearlyOutChartData = {
           data: {
             labels: [
-              "jan",
-              "feb",
-              "mar",
-              "apr",
-              "may",
-              "jun",
-              "jul",
-              "aug",
-              "sep",
-              "oct",
-              "nov",
-              "dec"
+              'jan',
+              'feb',
+              'mar',
+              'apr',
+              'may',
+              'jun',
+              'jul',
+              'aug',
+              'sep',
+              'oct',
+              'nov',
+              'dec'
             ],
             series: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
           },
@@ -625,11 +625,11 @@ class Charts extends React.Component {
             low: 0,
             high: 500000,
             showPoint: true,
-            height: "300px"
+            height: '300px'
           },
           animation: {
             draw: function(data) {
-              if (data.type === "line" || data.type === "area") {
+              if (data.type === 'line' || data.type === 'area') {
                 data.element.animate({
                   d: {
                     begin: 600,
@@ -643,14 +643,14 @@ class Charts extends React.Component {
                     easing: Chartist.Svg.Easing.easeOutQuint
                   }
                 })
-              } else if (data.type === "point") {
+              } else if (data.type === 'point') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays,
                     dur: durations,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -667,18 +667,18 @@ class Charts extends React.Component {
         multipleYearlyChart = {
           data: {
             labels: [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec"
+              'Jan',
+              'Feb',
+              'Mar',
+              'Apr',
+              'May',
+              'Jun',
+              'Jul',
+              'Aug',
+              'Sep',
+              'Oct',
+              'Nov',
+              'Dec'
             ],
             series: [
               [
@@ -716,11 +716,11 @@ class Charts extends React.Component {
             axisX: {
               showGrid: false
             },
-            height: "300px"
+            height: '300px'
           },
           responsiveOptions: [
             [
-              "screen and (max-width: 640px)",
+              'screen and (max-width: 640px)',
               {
                 seriesBarDistance: 5,
                 axisX: {
@@ -733,14 +733,14 @@ class Charts extends React.Component {
           ],
           animation: {
             draw: function(data) {
-              if (data.type === "bar") {
+              if (data.type === 'bar') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays2,
                     dur: durations2,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -751,18 +751,18 @@ class Charts extends React.Component {
         multipleYearlyChart = {
           data: {
             labels: [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec"
+              'Jan',
+              'Feb',
+              'Mar',
+              'Apr',
+              'May',
+              'Jun',
+              'Jul',
+              'Aug',
+              'Sep',
+              'Oct',
+              'Nov',
+              'Dec'
             ],
             series: [
               [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -774,11 +774,11 @@ class Charts extends React.Component {
             axisX: {
               showGrid: false
             },
-            height: "300px"
+            height: '300px'
           },
           responsiveOptions: [
             [
-              "screen and (max-width: 640px)",
+              'screen and (max-width: 640px)',
               {
                 seriesBarDistance: 5,
                 axisX: {
@@ -791,14 +791,14 @@ class Charts extends React.Component {
           ],
           animation: {
             draw: function(data) {
-              if (data.type === "bar") {
+              if (data.type === 'bar') {
                 data.element.animate({
                   opacity: {
                     begin: (data.index + 1) * delays2,
                     dur: durations2,
                     from: 0,
                     to: 1,
-                    easing: "ease"
+                    easing: 'ease'
                   }
                 })
               }
@@ -808,7 +808,7 @@ class Charts extends React.Component {
       }
 
       //pie chart
-      if (Object.keys(pieData).length > 0) {
+      if (pieData && Object.keys(pieData).length > 0) {
         const totalFunds = Number(pieData.totalIn) + Number(pieData.totalOut)
         const totalIn = Number(pieData.totalIn)
         const totalOut = Number(pieData.totalOut)
@@ -822,7 +822,7 @@ class Charts extends React.Component {
             ]
           },
           options: {
-            height: "230px"
+            height: '230px'
           }
         }
       } else {
@@ -832,7 +832,7 @@ class Charts extends React.Component {
             series: [0, 0]
           },
           options: {
-            height: "230px"
+            height: '230px'
           }
         }
       }
@@ -973,9 +973,9 @@ class Charts extends React.Component {
                 </CardBody>
                 <CardFooter stats className={classes.cardFooter}>
                   <h6 className={classes.legendTitle}>Legend</h6>
-                  <i className={"fas fa-circle " + classes.info} /> Total Funds
+                  <i className={'fas fa-circle ' + classes.info} /> Total Funds
                   In{` `}
-                  <i className={"fas fa-circle " + classes.danger} /> Total
+                  <i className={'fas fa-circle ' + classes.danger} /> Total
                   Funds Out
                   {` `}
                 </CardFooter>
@@ -989,9 +989,9 @@ class Charts extends React.Component {
         <div className="sweet-loading">
           <ClipLoader
             css={override}
-            sizeUnit={"px"}
+            sizeUnit={'px'}
             size={150}
-            color={"#123abc"}
+            color={'#123abc'}
             loading={this.state.loading}
           />
         </div>
