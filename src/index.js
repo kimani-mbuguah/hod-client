@@ -37,11 +37,11 @@ import store from './store'
 const hist = createBrowserHistory()
 
 // Check for token
-if (localStorage.jwtToken) {
+if (localStorage.hodJwtToken) {
   // Set auth token header auth
-  setAuthToken(localStorage.jwtToken)
+  setAuthToken(localStorage.hodJwtToken)
   // Decode token and get user info and exp
-  const decoded = jwt_decode(localStorage.jwtToken)
+  const decoded = jwt_decode(localStorage.hodJwtToken)
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded))
 
