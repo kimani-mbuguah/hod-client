@@ -95,8 +95,7 @@ class Dashboard extends React.Component {
 	}
 
 	render() {
-    const { role } = this.props.auth.user;
-    console.log(role)
+		const { role } = this.props.auth.user;
 
 		const { classes } = this.props;
 		let weeklyInChartData, weeklyOutChartData, totalIn, totalOut;
@@ -574,7 +573,7 @@ class Dashboard extends React.Component {
 							</GridItem>
 						</GridContainer>
 						<h3>Calendar</h3>
-					
+
 						<GridContainer justify="center">
 							<GridItem xs={12} sm={12} md={12}>
 								<Card>
