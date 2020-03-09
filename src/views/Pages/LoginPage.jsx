@@ -56,7 +56,7 @@ class LoginPage extends React.Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/admin/dashboard")
+      window.location.href = "/admin/dashboard"
     }
     this.timeOutFunction = setTimeout(
       function() {
@@ -68,7 +68,8 @@ class LoginPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/admin/dashboard")
+      window.location.href = "/admin/dashboard"
+     // this.props.history.push("/admin/dashboard")
     }
 
     if (nextProps.errors) {
