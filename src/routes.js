@@ -27,6 +27,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import Face from "@material-ui/icons/Face";
 import Lock from "@material-ui/icons/Lock";
 import Call from "@material-ui/icons/Call";
+import LanguageIcon from '@material-ui/icons/Language';
 
 import jwt_decode from "jwt-decode";
 const token = localStorage.getItem("hodJwtToken");
@@ -362,28 +363,28 @@ if (token) {
 			{
 				collapse: true,
 				name: "Website",
-				icon: Call,
+				icon: LanguageIcon,
 				state: "communicationCollapse",
 				views: [
 					{
 						path: "/slider",
 						name: "Slider",
 						mini: "S",
-						component: IndividualSMS,
+						component: Dashboard,
 						layout: "/admin"
 					},
 					{
 						path: "/gallery",
 						name: "Gallery",
 						mini: "G",
-						component: MultipleRecipients,
+						component: Dashboard,
 						layout: "/admin"
 					},
 					{
 						path: "/events",
 						name: "Events",
 						mini: "E",
-						component: MinistrySms,
+						component: Dashboard,
 						layout: "/admin"
 					}
 				]
